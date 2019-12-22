@@ -56,43 +56,49 @@ class Obs():
         self.filter['thru'] = self.filter['col2']        
 
 
-    def spec2Mag(spec,filter_thru):
-        C= 2.9979000e+10 # the speed of light
-        careful = 1.0
-        wave = spec['WAVELENGTH']
-        flux = spec['FLUX']
+    def specFilterFlux(self,template):
 
-        frac_filt = 0.0
-        fwave=filter_thru['wavelength']
-        fthru=filt_thru['thru']
+        c = scipy.constants.c*1e10 # Ang
 
-        fthru /= np.trapz(fthru)
+        wave = template['WAVELENGTH']
+        flux = template['FLUX']
+        if self.transmission is not None:
+            t_ext=self.transmission.trans(wave)
+            flux *= t_ext
+        fwave=self.filter['wavelength']
+        fthru=self.filt['thru']
 
-        wh=(fwave > min(wave)) & (fwave <= max(wave))
+        interpfilt = np.interp(, filtwave, filtthru)
+    
+        good = (filtwave > wave.min()) & (filtwave < wave.max())
+
+
+        wave_p_sq = np.trapz(filtthru*filtwave,x=filtwave)
+        wave_p_sq /= np.trapz(filtthru/filtwave,x=filtwave)
+
+        totfilt = np.trapz(interpfilt,x=wave)
+        totflux = np.trapz(flux*interpfilt,x=wave)
+        totflux /= totfilt
+    
+        totflux *= wave_p_sq/c
+
+        return totflux, np.sqrt(wave_p_sq)
         
 
-        if len(fwave[wh]) > 0 :
-            frac_filt=np.trapz(fthru[wh], x=fwave[wh])/np.trapz(fthru, x=fwave)
-            
-            if frac_filt >= careful:
-                
-                llambda=np.trapz(fthru*fwave,x=fwave)/np.trapz(fthru,x=fwave)
-                filt_interp = np.interp(wave,fwave, fthru)
-                totfilt=np.trapz(interpfilt,x=wave)
-                totflux=1d-17*llambda^2*1d-8*np.ttrapz(flux*interpfilt,x=wave)/totfilt/c
-                                # flux convolved with filter/ integral over filter
-                                # times lambda^2/c
-                                # factor of 1d-17 for the initial units
-                                # factor of 1d-8 to convert from angstroms
 
-                mag=-2.5*np.log10(totflux)-48.6
-            else:
-                mag = -99
-            
+    def specFilterMag(self):
+
+        tot_flux, wave_p = self.specFilterFlux(self.template)
+
+        if self.mtype is 'Vega':
+            vega_flux, wave_p = self.specFilterFlux(self.vegatemplate)
+            mag = -2.5*np.log10(tot_flux) + 2.5*np.log10(vega_flux)
+        elif self.mtype is 'AB':
+            mag=-2.5*np.log10(tot_flux)-48.6
         else:
-            mag = -99
-        return mag
+            mag=-2.5*np.log10(tot_flux)-48.6
 
+        return mag
 
 
     def normalizeTemplate(self):
