@@ -10,8 +10,8 @@ import numpy
 import Telescope
 
 class Instrument():
-    def __init__(self,instrument):
-        self.name = instrument
+    def __init__(self):
+        self.name = ""
         self.mag_perp = 0
         self.mag_para = 0
         self.pixel_scale = 0.
@@ -23,14 +23,14 @@ class Instrument():
         self.readno= 0.0
         self.dichroic= ''
         self.grating= ''
-        self.cwave= 0.     # Central wavelength
+
         self.swidth= 0.    # Slit width
         self.sheight= 0.   # Slit height
-        self.wvmnx= fltarr(2)   # wavelength min/max
+        self.wvmnx= []   # wavelength min/max
         self.bins= 0       # Spatial binning
         self.bind= 0       # Dispersion binning
         self.dely= 0.0 
-        
+        self.telescope = None
         
     def __repr__(self):
         "<inst %s %s>" % (self.name ,self.grating)
