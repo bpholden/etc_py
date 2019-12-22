@@ -97,17 +97,9 @@ class Obs():
 
     def normalizeTemplate(self):
 
-        # this is how single_spec2mag wants
-        # the flux units, 1e-17 ergs/cm/cm/s/A
-        temp['WAVELENGTH'] *= (1+obs.redshift) # note, we are doing NO bounds checking.
-        temp_mstar = single_spec2mag(temp,self.filter)
-
-        if self.mtype == 1:
-            vega_mstar = single_spec2mag(self.vega_template,self.filter)
-            temp_mstar = temp_mstar - vega_mstar
-            temp['FLUX'] *= 10^(0.4*temp_mstar)   # force to have 0 mag in filter
-            temp['FLUX'] *= temp['WAVELENGTH'] /(6.626d-27 *2.99792e18)    # convert to photons
-            n0 = interpol(wave,temp['FLUX'],temp'W[AVELENGTH'])
+        mag = self.specFilterMag()
+        dmag = self.mstar - mag
+        self.template['FLUX'] *= 10**(-0.4*dmag)
 
         
         
