@@ -108,4 +108,10 @@ class Obs():
         self.template['FLUX'] *= 10**(-0.4*dmag)
 
         
+    def computePhotons(self):
+    
+        phot = self.template['FLUX']  * self.template['WAVELENGTH'] / (2.99792e18)
+        # fnu = flambda * lambda *lambda / c , c in Angstroms per second!
+        phot /= 6.626e-27 # ergs - s
+        return phot
         
