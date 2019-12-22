@@ -1,10 +1,11 @@
+import os
+import os.path
+
 import scipy
 import astropy
 import astropy.io
 import astropy.io.fits
 import numpy
-import os
-import os.path
 
 class Telescope():
     def __init__(self,telescope):
