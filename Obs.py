@@ -2,6 +2,7 @@ import os
 import os.path
 
 import scipy
+import scipy.constants
 import astropy
 import astropy.io
 import astropy.io.fits
@@ -24,7 +25,8 @@ class Obs():
         self.templatefn= None
         self.templatefullfn= None        
         self.template = None
-
+        self.phot = None
+        
         self.transmission = None
         
         self.vega_templatefn = self.getFilename("alpha_lyr_stis_005.fits","data/templates")
@@ -113,8 +115,8 @@ class Obs():
         
     def computePhotons(self):
     
-        phot = self.template['FLUX']  * self.template['WAVELENGTH'] / (2.99792e18)
+        self.phot = self.template['FLUX']  * self.template['WAVELENGTH'] / (scipy.constants.c*1e10)
         # fnu = flambda * lambda *lambda / c , c in Angstroms per second!
-        phot /= 6.626e-27 # ergs - s
-        return phot
+        self.phot /= scipy.constants.h * 1e7 # ergs - s
+
         
