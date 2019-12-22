@@ -168,7 +168,7 @@ class Instrument():
         self.dark = 0.001
         self.bind = 1
         self.bins = 1
-        self.wvmnx = [5000, 9000.]
+        self.wvmnx = [6000, 9000.]
         self.swidth = 1.0
         self.sheight = 10.0
 
