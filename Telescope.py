@@ -8,8 +8,8 @@ import astropy.io.fits
 import numpy
 
 class Telescope():
-    def __init__(self,telescope):
-        self.name= '' # KeckI, KeckII, Lick-3m 
+    def __init__(self,name):
+        self.name= name # Keck, Shane, APF
         self.area= 0.
         self.plate_scale= 0. 
 
