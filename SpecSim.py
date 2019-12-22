@@ -15,6 +15,9 @@ class SpecSim()
         if transmission is not None:
             self.transmission = transmission
 
+        if self.obs is None or self.instrument is None:
+            return None
+
         
 
         
