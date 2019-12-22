@@ -34,24 +34,24 @@ class Obs():
         "<obs %s %.1f %.2f %.2f>" % (self.templatefn, self.seeing, self.airmass, self.mag)
 
 
-    def genFilename(fn,datapath):
+    def genFilename(self,datapath):
         try:
             inpath = os.path.realpath(__file__)
         else:
             inpath = os.getcwd()
-        fullfn = os.path.join(inpath,datapath,fn)
-        return = fullfn
+        self.filterfullfn = os.path.join(inpath,datapath,self.filterfn)
+        return
         
-    def getFileData(fullfn):
-        return astropy.io.fits.getdata(fullfn)
+    def getFileData(self):
+        return astropy.io.fits.getdata(self.filterfullfn)
 
-    def getTemplate(templatefn):
-        self.templatefn = self.getFilename(templatefn,"data/templates")
-        self.template = self.getFileData(self.templatefn)
+    def getTemplate(self):
+        self.templatefullfn = self.getFilename(templatefn,"data/templates")
+        self.template = self.getFileData(self.templatefullfn)
 
-    def getFilter(filterfn):
-        self.filterfn = self.getFilename(filterfn,"data/templates")
-        self.filter = astropy.io.ascii.read(self.filterfn)
+    def getFilter(self):
+        self.filterfn = self.getFilename(self.filterfullfn,"data/templates")
+        self.filter = astropy.io.ascii.read(self.filterfullfn)
         self.filter['wavelength'] = self.filter['col1']
         self.filter['thru'] = self.filter['col2']        
 
