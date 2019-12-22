@@ -35,9 +35,12 @@ class Transmission():
         else:
             inpath = os.getcwd()
         infile = os.path.join(inpath,"data",self.infile)
-        mtham_ext = astropy.io.ascii.read(inpath)
-        self.inwave = mtham_ext['col1']
-        self.inextinc = mtham_ext['col2']
+        if os.path.exists(infile):
+            ext = astropy.io.ascii.read(inpath)
+            self.inwave = ext['col1']
+            self.inextinc = ext['col2']
+        else:
+            return
 
     def trans(self,wavegrid):
         self.extgrid = numpy.interp(wavegrid,self.inwave,self.inextinc)
