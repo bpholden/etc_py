@@ -103,6 +103,9 @@ class Obs():
 
     def normalizeTemplate(self):
 
+        self.getFilter()
+        self.getTemplate()
+        
         mag = self.specFilterMag()
         dmag = self.mstar - mag
         self.template['FLUX'] *= 10**(-0.4*dmag)
