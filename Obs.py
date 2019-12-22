@@ -13,13 +13,19 @@ class Obs():
         self.airmass= 0.
         self.mphase= 0
         self.mstar= 0.       # Mag
-        self.filterfn= ''      
-        self.filter= None      # Filter
-        self.mtype= 0        # Mag flag:  1=AB, 2=Johnson
+        self.mtype= 0        # Mag flag:  AB, Vega, AB default
         self.exptime= 0.0 
-        self.redshift= 0.0 
-        self.templatefn= ''
+        self.redshift= 0.0
+        
+        self.filterfn= None
+        self.filterfulln = None
+        self.filter= None      # Filter
+        
+        self.templatefn= None
+        self.templatefullfn= None        
         self.template = None
+
+        self.transmission = None
         
         self.vega_templatefn = self.getFilename("alpha_lyr_stis_005.fits","data/templates")
         self.vega_template = self.getFileData(self.vega_templatefn)
