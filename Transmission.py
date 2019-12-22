@@ -12,6 +12,7 @@ class Transmission():
         self.site= site
         self.inwave = None
         self.inextinc = None
+        self.extgrid = None
         self.infile = self.extfilename()
 
     def extfilename(self):
@@ -39,6 +40,6 @@ class Transmission():
         self.inextinc = mtham_ext['col2']
 
     def trans(self,wavegrid):
-        extgrid = numpy.interp(wavegrid,self.inwave,self.inextinc)
-        return extgrid
+        self.extgrid = numpy.interp(wavegrid,self.inwave,self.inextinc)
+        return self.extgrid
     
