@@ -31,7 +31,7 @@ class Obs():
         self.vega_template = self.getFileData(self.vega_templatefn)
 
     def __repr__(self):
-        "<obs %s %.1f %.2f %.2f>" % (self.templatefn, self.seeing, self.airmass, self.mag)
+        "<obs %s %.1f\" %.1f s %.2f %.2f mag %s %s>" % (self.templatefn, self.seeing, self.exptime, self.airmass, self.mag, self.mtype, self.filterfn)
 
 
     def genFilename(self,datapath):
