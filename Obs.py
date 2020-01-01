@@ -67,7 +67,7 @@ class Obs():
         flux = template['FLUX']
         if self.transmission is not None:
             t_ext=self.transmission.trans(wave)
-            flux *= t_ext
+            flux *= 10**(-0.4*t_ext*self.airmass)
         fwave=self.filter['wavelength']
         fthru=self.filt['thru']
 
@@ -119,5 +119,7 @@ class Obs():
         self.phot = self.template['FLUX']  * self.template['WAVELENGTH'] / (scipy.constants.c*1e10)
         # fnu = flambda * lambda *lambda / c , c in Angstroms per second!
         self.phot /= scipy.constants.h * 1e7 # ergs - s
-
+        if self.transmission is not None:
+            self.phot *= 10**(-0.4*self.transmission.trans(self.template['WAVELENGTH'])*self.airmass)
+        self.phot *= self.exptime
         
