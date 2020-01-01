@@ -156,7 +156,7 @@ class Instrument():
         self.bins = 1
         self.wvmnx = [3500, 6000.]
         self.swidth = 1.0
-        self.sheight = 10.0
+        self.sheight = 30.0
         
         return
 
@@ -174,7 +174,7 @@ class Instrument():
         self.bins = 1
         self.wvmnx = [6000, 9000.]
         self.swidth = 1.0
-        self.sheight = 10.0
+        self.sheight = 30.0
 
         return
 
