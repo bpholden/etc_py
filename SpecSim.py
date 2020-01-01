@@ -1,12 +1,12 @@
 class SpecSim()
     def __init__(self):
-        self.instrument = None
+        self.instrument = []
         self.obs = None
         self.transmission = None
 
 
         
-    def calcS2N(self,instrument=None,obs=None,transmission=None):
+    def calcS2N(self,instrument=[],obs=None,transmission=None):
 
         if instrument is not None:
             self.instrument = instrument
