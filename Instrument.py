@@ -49,8 +49,8 @@ class Instrument():
         self.mag_perp = 20.9
         self.mag_para = 20.9
         self.pixel_size = 15.0
-        self.telescope = Telescope.Telescope('Shane')
-        self.telescope.shane()
+        self.telescope = Telescope.Telescope(name='Shane')
+
         self.scale_perp = self.scale(self.mag_perp)
         self.scale_para = self.scale(self.mag_para)
         self.grating = grating
@@ -73,8 +73,8 @@ class Instrument():
         self.mag_perp = 20.9
         self.mag_para = 20.9
         self.pixel_size = 15.0
-        self.telescope = Telescope.Telescope('Shane')
-        self.telescope.shane()
+        self.telescope = Telescope.Telescope(name='Shane')
+
         self.scale_perp = self.scale(self.mag_perp)
         self.scale_para = self.scale(self.mag_para)
         self.grating = grism
@@ -127,8 +127,8 @@ class Instrument():
         self.mag_perp = 5.5136 # Magnification perpendicular to dispesion
         self.mag_para = 4.9913 # Magnification parallel to dispesion
         self.pixel_size = 13.5 # in microns
-        self.telescope = Telescope.Telescope('APF')
-        self.telescope.apf()
+        self.telescope = Telescope.Telescope(name='APF')
+
         self.scale_perp = self.scale(self.mag_perp)
         self.scale_para = self.scale(self.mag_para)
         self.R     = 282160.8
@@ -145,8 +145,8 @@ class Instrument():
     def DARTSBlue(self):
         self.name = 'DARTS Blue'
         self.pixel_size = 13.5 # in microns
-        self.telescope = Telescope.Telescope('APF')
-        self.telescope.apf()
+        self.telescope = Telescope.Telescope(name='APF')
+
         self.scale_perp = self.scale(self.mag_perp)
         self.scale_para = self.scale(self.mag_para)
         self.R = 750
@@ -163,8 +163,8 @@ class Instrument():
     def DARTSRed(self):
         self.name = 'DARTS Red'        
         self.pixel_size = 13.5 # in microns
-        self.telescope = Telescope.Telescope('APF')
-        self.telescope.apf()
+        self.telescope = Telescope.Telescope(name='APF')
+
         self.scale_perp = self.scale(self.mag_perp)
         self.scale_para = self.scale(self.mag_para)
         self.R = 750
