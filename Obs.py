@@ -11,13 +11,13 @@ import numpy as np
 class Obs():
     def __init__(self):
         self.seeing= 0.
-        self.airmass= 0.
-        self.mphase= 0
-        self.mstar= 0.       # Mag
-        self.mtype= 0        # Mag flag:  AB, Vega, AB default
+        self.airmass= 1.
         self.exptime= 0.0 
         self.redshift= 0.0
-        
+
+        self.mstar= 0.       # Mag
+        self.mtype= 0        # Mag flag:  AB, Vega, AB default
+
         self.filterfn= None
         self.filterfulln = None
         self.filter= None      # Filter
