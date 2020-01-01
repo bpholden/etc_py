@@ -20,7 +20,7 @@ class Telescope():
             self.Keck()
 
     def __repr__(self):
-        "<telescope %s %.1f %.1f>" % (self.name,self.area,self.plate_scale)
+        return "<telescope %s %.1f %.1f>" % (self.name,self.area,self.plate_scale)
 
 
     def Keck(self):
