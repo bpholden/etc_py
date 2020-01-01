@@ -8,10 +8,16 @@ import astropy.io.fits
 import numpy
 
 class Telescope():
-    def __init__(self,name):
+    def __init__(self,name=''):
         self.name= name # Keck, Shane, APF
         self.area= 0.
-        self.plate_scale= 0. 
+        self.plate_scale= 0.
+        if name is 'APF':
+            self.APF()
+        elif name is 'Shane':
+            self.Shane()
+        elif name is 'Keck':
+            self.Keck()
 
     def __repr__(self):
         "<telescope %s %.1f %.1f>" % (self.name,self.area,self.plate_scale)
