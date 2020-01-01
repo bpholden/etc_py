@@ -50,6 +50,7 @@ class Obs():
     def getTemplate(self):
         self.templatefullfn = self.getFilename(templatefn,"data/templates")
         self.template = self.getFileData(self.templatefullfn)
+        self.template['WAVELENGTH'] *= 1+self.redshift
 
     def getFilter(self):
         self.filterfn = self.getFilename(self.filterfullfn,"data/templates")
