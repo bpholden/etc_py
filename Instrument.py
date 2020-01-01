@@ -33,10 +33,10 @@ class Instrument():
         self.telescope = None
         
     def __repr__(self):
-        "<inst %s %s>" % (self.name ,self.grating)
+        return "<inst %s %s>" % (self.name ,self.grating)
 
     def __str__(self):
-        "<inst %s %s>" % (self.name ,self.grating)
+        return "<inst %s %s>" % (self.name ,self.grating)
 
 
     def scale(self,mag):
