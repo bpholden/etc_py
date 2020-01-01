@@ -123,7 +123,8 @@ class Instrument():
             self.swidth = 1.0
             self.sheight = 3.0
     
-    def levy(self,decker):
+    def levy(self,decker='W'):
+        self.name = 'Levy'
         self.mag_perp = 5.5136 # Magnification perpendicular to dispesion
         self.mag_para = 4.9913 # Magnification parallel to dispesion
         self.pixel_size = 13.5 # in microns
