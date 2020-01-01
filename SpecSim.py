@@ -19,5 +19,11 @@ class SpecSim()
             return None
 
         
+        obs.normalizeTemplate()
+        obs.computePhotons()
 
-        
+        # this generates the number of photons per A per cm^2 landing on the telescope
+        # now need to take into account 
+
+        if len(self.instrument) > 0:
+            obs.phot *= self.instrument[0].telescope.area
