@@ -45,6 +45,7 @@ class Instrument():
         
     def kastRed(self,grating):
 
+        self.name = 'Kast Red'
         self.mag_perp = 20.9
         self.mag_para = 20.9
         self.pixel_size = 15.0
@@ -68,6 +69,7 @@ class Instrument():
     
     def kastBlue(self,grism):
 
+        self.name = 'Kast Blue'
         self.mag_perp = 20.9
         self.mag_para = 20.9
         self.pixel_size = 15.0
@@ -140,7 +142,8 @@ class Instrument():
         
         return
 
-    def apflowBlue(self):
+    def DARTSBlue(self):
+        self.name = 'DARTS Blue'
         self.pixel_size = 13.5 # in microns
         self.telescope = Telescope.Telescope('APF')
         self.telescope.apf()
@@ -157,7 +160,8 @@ class Instrument():
         
         return
 
-    def apflowRed(self):
+    def DARTSRed(self):
+        self.name = 'DARTS Red'        
         self.pixel_size = 13.5 # in microns
         self.telescope = Telescope.Telescope('APF')
         self.telescope.apf()
