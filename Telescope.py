@@ -23,12 +23,12 @@ class Telescope():
         "<telescope %s %.1f %.1f>" % (self.name,self.area,self.plate_scale)
 
 
-    def keck(self):
+    def Keck(self):
         self.name = 'Keck'
         self.area = 723674.
         self.plate_scale = 1.379
 
-    def shane(self):
+    def Shane(self):
         self.name = 'Shane'
         self.area = 63617.
         self.plate_scale = 1.379
