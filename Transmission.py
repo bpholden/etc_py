@@ -14,6 +14,8 @@ class Transmission():
         self.inextinc = None
         self.extgrid = None
         self.infile = self.extfilename()
+        if self.infile is not '':
+            self.readin_ext()
 
     def extfilename(self):
         if self.site == "MH":

@@ -18,7 +18,7 @@ class SpecSim()
         if self.obs is None or self.instrument is None:
             return None
 
-        
+
         obs.normalizeTemplate()
         obs.computePhotons()
 
