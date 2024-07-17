@@ -31,7 +31,7 @@ class Telescope():
     def Shane(self):
         self.name = 'Shane'
         self.area = 63617.
-        self.plate_scale = 1.379
+        self.plate_scale = 3.86
 
     def APF(self):
         self.name = 'APF'
