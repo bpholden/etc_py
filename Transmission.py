@@ -47,5 +47,8 @@ class Transmission():
 
     def trans(self,wavegrid):
         self.extgrid = numpy.interp(wavegrid,self.inwave,self.inextinc)
+
+        self.extgrid = 10**(-0.40 * self.extgrid * self.airmass)
+
         return self.extgrid
     
