@@ -8,9 +8,10 @@ import astropy.io.fits
 import numpy
 
 class Transmission():
-    def __init__(self,site=""):
+    def __init__(self,inwave, airmass, site="MH"):
         self.site= site
-        self.inwave = None
+        self.inwave = inwave
+        self.airmass = airmass
         self.inextinc = None
         self.extgrid = None
         self.infile = self.extfilename()
@@ -30,11 +31,11 @@ class Transmission():
         "<obs %s>" % (self.site)
 
 
-    def readin_ext(self)
+    def readin_ext(self):
 
         try:
             inpath = os.path.realpath(__file__)
-        else:
+        except:
             inpath = os.getcwd()
         infile = os.path.join(inpath,"data",self.infile)
         if os.path.exists(infile):
