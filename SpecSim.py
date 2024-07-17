@@ -19,8 +19,8 @@ class SpecSim()
             return None
 
 
-        obs.normalizeTemplate()
-        obs.computePhotons()
+        obs.normalize_template()
+        obs.compute_photons()
 
         # this generates the number of photons per A per cm^2 landing on the telescope
         # now need to take into account 

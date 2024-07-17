@@ -29,37 +29,37 @@ class Obs():
         
         self.transmission = None
         
-        self.vega_templatefn = self.getFilename("alpha_lyr_stis_005.fits","data/templates")
-        self.vega_template = self.getFileData(self.vega_templatefn)
+        self.vega_templatefn = self.gen_filename("alpha_lyr_stis_005.fits","data/templates")
+        self.vega_template = self.get_file_data(self.vega_templatefn)
 
     def __repr__(self):
         "<obs %s %.1f\" %.1f s %.2f %.2f mag %s %s>" % (self.templatefn, self.seeing, self.exptime, self.airmass, self.mag, self.mtype, self.filterfn)
 
 
-    def genFilename(self,datapath):
+    def gen_filename(self,datapath):
         try:
             inpath = os.path.realpath(__file__)
-        else:
+        except:
             inpath = os.getcwd()
         self.filterfullfn = os.path.join(inpath,datapath,self.filterfn)
         return
         
-    def getFileData(self):
+    def get_file_data(self):
         return astropy.io.fits.getdata(self.filterfullfn)
 
-    def getTemplate(self):
-        self.templatefullfn = self.getFilename(templatefn,"data/templates")
-        self.template = self.getFileData(self.templatefullfn)
+    def get_template(self):
+        self.templatefullfn = self.gen_filename(self.templatefn,"data/templates")
+        self.template = self.get_file_data(self.templatefullfn)
         self.template['WAVELENGTH'] *= 1+self.redshift
 
-    def getFilter(self):
-        self.filterfn = self.getFilename(self.filterfullfn,"data/templates")
+    def get_filter(self):
+        self.filterfn = self.gen_filename(self.filterfullfn,"data/templates")
         self.filter = astropy.io.ascii.read(self.filterfullfn)
         self.filter['wavelength'] = self.filter['col1']
         self.filter['thru'] = self.filter['col2']        
 
 
-    def specFilterFlux(self,template):
+    def spec_filter_flux(self,template):
 
         c = scipy.constants.c*1e10 # Ang
 
@@ -68,14 +68,16 @@ class Obs():
         if self.transmission is not None:
             t_ext=self.transmission.trans(wave)
             flux *= 10**(-0.4*t_ext*self.airmass)
-        fwave=self.filter['wavelength']
-        fthru=self.filt['thru']
+        filtwave=self.filter['wavelength']
+        filtthru=self.filter['thru']
 
-        interpfilt = np.interp(, filtwave, filtthru)
-    
         good = (filtwave > wave.min()) & (filtwave < wave.max())
 
-
+        interpfilt = np.interp(wave, filtwave[good], filtthru[good])
+    
+        # Normalize filter, this is a filter specific property
+        # so we do not use the interpolated filter throughput
+        # nor trimmed wavelength range
         wave_p_sq = np.trapz(filtthru*filtwave,x=filtwave)
         wave_p_sq /= np.trapz(filtthru/filtwave,x=filtwave)
 
@@ -89,12 +91,12 @@ class Obs():
         
 
 
-    def specFilterMag(self):
+    def spec_filter_mag(self):
 
-        tot_flux, wave_p = self.specFilterFlux(self.template)
+        tot_flux, _ = self.spec_filter_flux(self.template)
 
         if self.mtype is 'Vega':
-            vega_flux, wave_p = self.specFilterFlux(self.vegatemplate)
+            vega_flux, _ = self.spec_filter_flux(self.vegatemplate)
             mag = -2.5*np.log10(tot_flux) + 2.5*np.log10(vega_flux)
         elif self.mtype is 'AB':
             mag=-2.5*np.log10(tot_flux)-48.6
@@ -104,7 +106,7 @@ class Obs():
         return mag
 
 
-    def normalizeTemplate(self):
+    def normalize_template(self):
 
         self.getFilter()
         self.getTemplate()
@@ -114,7 +116,7 @@ class Obs():
         self.template['FLUX'] *= 10**(-0.4*dmag)
 
         
-    def computePhotons(self):
+    def compute_photons(self):
     
         self.phot = self.template['FLUX']  * self.template['WAVELENGTH'] / (scipy.constants.c*1e10)
         # fnu = flambda * lambda *lambda / c , c in Angstroms per second!
