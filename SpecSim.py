@@ -1,3 +1,5 @@
+import Sky
+
 class SpecSim()
     def __init__(self):
         self.instrument = []
@@ -20,7 +22,7 @@ class SpecSim()
         if self.obs is None or self.instrument is None:
             return None
         if self.sky is None:
-            self.sky = Sky()
+            self.sky = Sky.Sky()
 
 
         self.obs.normalize_template()
@@ -30,4 +32,4 @@ class SpecSim()
         # now need to take into account 
 
         if len(self.instrument) > 0:
-            self.obs.phot *= self.instrument[0].telescope.area
+            self.obs.phot *= self.instrument.telescope.area
