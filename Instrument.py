@@ -39,7 +39,7 @@ class Instrument():
         return "<inst %s %s>" % (self.name ,self.grating)
 
 
-    def scale(self,mag):
+    def scale(self, mag):
         return self.telescope.plate_scale * mag * self.pixel_size/1000.
 
         
