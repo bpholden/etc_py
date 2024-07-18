@@ -1,6 +1,6 @@
 import Sky
 
-class SpecSim()
+class SpecSim():
     def __init__(self):
         self.instrument = []
         self.obs = None
@@ -26,10 +26,11 @@ class SpecSim()
 
         self.obs.normalize_template()
         self.obs.compute_photons()
+        self.obs.rescale(self.instrument)
         self.sky.rescale(self.instrument, self.obs.wave, self.obs.spec)
         
         # this generates the number of photons per A per cm^2 landing on the telescope
         # now need to take into account 
 
-        if len(self.instrument) > 0:
-            self.obs.phot *= self.instrument.telescope.area
+        self.obs.phot *= self.instrument.telescope.area
+        self.obs.phot *= self.obs.transmission.extgrid
