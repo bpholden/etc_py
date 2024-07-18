@@ -24,10 +24,10 @@ class SpecSim()
         if self.sky is None:
             self.sky = Sky.Sky()
 
-
         self.obs.normalize_template()
         self.obs.compute_photons()
-
+        self.sky.rescale(self.instrument, self.obs.wave, self.obs.spec)
+        
         # this generates the number of photons per A per cm^2 landing on the telescope
         # now need to take into account 
 
