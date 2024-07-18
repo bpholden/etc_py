@@ -3,10 +3,10 @@ class SpecSim()
         self.instrument = []
         self.obs = None
         self.transmission = None
-
+        self.sky = None
 
         
-    def calc_sn(self, instrument=None, obs=None, transmission=None):
+    def calc_sn(self, instrument=None, obs=None, transmission=None, sky=None):
 
         if instrument is not None:
             self.instrument = instrument
@@ -14,9 +14,13 @@ class SpecSim()
             self.obs = obs
         if transmission is not None:
             self.transmission = transmission
+        if sky is not None:
+            self.sky = sky
 
         if self.obs is None or self.instrument is None:
             return None
+        if self.sky is None:
+            self.sky = Sky()
 
 
         self.obs.normalize_template()
