@@ -6,7 +6,7 @@ class SpecSim()
 
 
         
-    def calc_sn(self,instrument=[],obs=None,transmission=None):
+    def calc_sn(self, instrument=None, obs=None, transmission=None):
 
         if instrument is not None:
             self.instrument = instrument
