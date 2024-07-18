@@ -10,9 +10,9 @@ import numpy as np
 
 class Obs():
     def __init__(self):
-        self.seeing= 0.
+        self.seeing= 1.
         self.airmass= 1.
-        self.exptime= 0.0 
+        self.exptime= 1.0 
         self.redshift= 0.0
 
         self.mstar= 0.       # Mag
