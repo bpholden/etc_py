@@ -14,6 +14,8 @@ class Obs():
         self.airmass= 1.
         self.exptime= 1.0 
         self.redshift= 0.0
+        self.npix_spat = 1
+        self.npix_spec = 1
 
         self.mstar= 0.       # Mag
         self.mtype= 0        # Mag flag:  AB, Vega, AB default
@@ -125,3 +127,7 @@ class Obs():
             self.phot *= 10**(-0.4*self.transmission.trans(self.template['WAVELENGTH'])*self.airmass)
         self.phot *= self.exptime
         
+    def rescale_template(self, instrument):
+        self.npix_spat = self.seeing / instrument.scale_perp
+
+        self.phot *= self.template['WAVELENGTH'].wave / instrument.R

@@ -132,7 +132,8 @@ class Instrument():
 
         self.scale_perp = self.scale(self.mag_perp)
         self.scale_para = self.scale(self.mag_para)
-        self.R     = 282160.8
+        #self.R     = 282160.8
+        self.R = 108362.0
         self.mlambda = 465980.24
         self.readno = 3.75
         self.dark = 0.001
